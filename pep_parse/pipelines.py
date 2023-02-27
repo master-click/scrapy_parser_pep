@@ -22,6 +22,9 @@ class PepParsePipeline:
         except OSError as exc:
             if exc.errno != errno.EEXIST:
                 raise
+        except MemoryError as e:
+            print(e)
+
         now = datetime.datetime.now().strftime(DATETIME_FORMAT)
         filename = dir / f'status_summary_{now}.csv'
         with open(filename, mode='w', encoding='utf-8') as f:
